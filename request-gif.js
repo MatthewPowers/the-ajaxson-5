@@ -2,9 +2,25 @@
 
 $(document).ready(function() {
     // register our function as the "callback" to be triggered by the form's submission event
-    $("#form-gif-request").submit(fetchAndDisplayGif); // in other words, when the form is submitted, fetchAndDisplayGif() will be executed
+
+        $("#form-gif-request").submit(fetchAndDisplayGif); // in other words, when the form is submitted, fetchAndDisplayGif() will be executed
+    
+    
 });
 
+function robotTest()
+{
+    robot = $("#userValidation");
+    console.log(robot);
+    if(robot != 5)
+    {
+        $("#noGif").append("No gif for you");
+    }
+    elseif(robot == 5)
+    {
+        fetchAndDisplayGif; 
+    }
+}
 
 /**
  * sends an asynchronous request to Giphy.com aksing for a random GIF using the 
@@ -15,11 +31,31 @@ $(document).ready(function() {
 function fetchAndDisplayGif(event) {
     setGifLoadedStatus(false);
     $( "#loading" ).attr("hidden", false);
-    
+
+    /*
+    robot = $("#userValidation");
+    console.log(robot);
+    if(robot != 5)
+    {
+        $("#noGif").append("No gif for you");
+        
+    }
+    */
+
     // This prevents the form submission from doing what it normally does: send a request (which would cause our page to refresh).
     // Because we will be making our own AJAX request, we dont need to send a normal request and we definitely don't want the page to refresh.
     event.preventDefault();
     
+    $("#noGif").empty();
+    var robot = $("#userValidation").val();
+    console.log(robot);
+    if(robot != 5)
+    {
+        $("#noGif").append("No gif for you");
+        $( "#loading" ).attr("hidden", true);
+        return 0;
+    }
+
     // get the user's input text from the DOM
     var searchQuery = $('#userInput').val(); // TODO should be e.g. "dance"
     console.log(searchQuery);
